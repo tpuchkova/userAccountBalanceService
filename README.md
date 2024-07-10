@@ -14,13 +14,14 @@
 
 ## Usage
 - Example of the POST request
-`curl --location 'localhost:8080/api/transaction' \
+
+curl --location 'localhost:8080/api/transaction' \
 --header 'Source-Type: game' \
   --header 'Content-Type: application/json' \
   --data '{
     "state" : "win",
     "amount": "1",
     "transaction_id" : "jksfjgdgddfffdldffkflds"
-}'`
+}'
 
 Every 5 minutes 10 latest odd records will be canceled and balance will be corrected by the application.
