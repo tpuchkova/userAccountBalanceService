@@ -8,7 +8,7 @@
 ## Installing&Running
 - Clone thist repo https://github.com/tpuchkova/userAccountBalanceService.git
 - Start docker desktop app
-- Install make scoop `install make`
+- Install make `scoop install make`
 - Open your terminal and run `make run` command to create and run docker containers
 - Run migrations `make migrate`
 
