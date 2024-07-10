@@ -1,13 +1,13 @@
 package service
 
 import (
-	handlermodel "awesomeProject/pkg/handler/model"
-	"awesomeProject/pkg/repository"
-	repositorymodel "awesomeProject/pkg/repository/model"
-	servicemodel "awesomeProject/pkg/service/model"
 	"errors"
 	"log"
 	"strconv"
+	handlermodel "userAccountBalanceService/pkg/handler/model"
+	"userAccountBalanceService/pkg/repository"
+	repositorymodel "userAccountBalanceService/pkg/repository/model"
+	servicemodel "userAccountBalanceService/pkg/service/model"
 )
 
 const (
@@ -69,7 +69,7 @@ func (s *TransactionService) AddTransaction(transaction handlermodel.Transaction
 }
 
 func (s *TransactionService) CancelLatestOddTransactions() error {
-	transactions, err := s.transactionRepo.GetLatestTransactions(20)
+	transactions, err := s.transactionRepo.GetLatestTransactions(19)
 	if err != nil {
 		return err
 	}
@@ -92,7 +92,7 @@ func (s *TransactionService) CancelLatestOddTransactions() error {
 				oddTransactionIDs = append(oddTransactionIDs, transaction.ID)
 				newBalance = balance
 			} else {
-				log.Printf("balance is too small to cancel transaction. aborting cancelling")
+				log.Printf("Balance is too small to cancel transaction. Aborting cancelling")
 				break
 			}
 		}

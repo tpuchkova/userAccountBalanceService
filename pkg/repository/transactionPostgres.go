@@ -1,10 +1,10 @@
 package repository
 
 import (
-	"awesomeProject/pkg/repository/model"
 	"fmt"
 	"github.com/jmoiron/sqlx"
 	"strings"
+	"userAccountBalanceService/pkg/repository/model"
 )
 
 type TransactionPostgres struct {
@@ -40,21 +40,14 @@ func (r *TransactionPostgres) CancelByIDs(idsToCancel []int) error {
 }
 
 func (r *TransactionPostgres) AddTransaction(transaction model.Transaction) (*model.Transaction, error) {
-	tx, err := r.db.Begin()
-	if err != nil {
-		return nil, err
-	}
-
 	var id int
 	var state string
 	var amount float64
 	var transactionID string
 	createQuery := fmt.Sprintf("INSERT INTO %s (state, amount, transaction_id) values ($1, $2, $3) RETURNING id, state, amount, transaction_id", transactionsTable)
 
-	row := tx.QueryRow(createQuery, transaction.State, transaction.Amount, transaction.TransactionID)
-	err = row.Scan(&id, &state, &amount, &transactionID)
-	if err != nil {
-		tx.Rollback()
+	row := r.db.QueryRow(createQuery, transaction.State, transaction.Amount, transaction.TransactionID)
+	if err := row.Scan(&id, &state, &amount, &transactionID); err != nil {
 		return nil, err
 	}
 
@@ -63,5 +56,5 @@ func (r *TransactionPostgres) AddTransaction(transaction model.Transaction) (*mo
 		State:         state,
 		Amount:        amount,
 		TransactionID: transactionID,
-	}, tx.Commit()
+	}, nil
 }

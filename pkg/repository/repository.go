@@ -1,8 +1,8 @@
 package repository
 
 import (
-	"awesomeProject/pkg/repository/model"
 	"github.com/jmoiron/sqlx"
+	"userAccountBalanceService/pkg/repository/model"
 )
 
 type Balance interface {

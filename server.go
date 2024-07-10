@@ -1,4 +1,4 @@
-package awesomeProject
+package userAccountBalanceService
 
 import (
 	"context"

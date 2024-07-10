@@ -1,16 +1,16 @@
 package handler
 
 import (
-	"awesomeProject/pkg/service"
 	"github.com/gin-gonic/gin"
+	"userAccountBalanceService/pkg/service"
 )
 
 type Handler struct {
-	services *service.Service
+	service *service.Service
 }
 
-func NewHandler(services *service.Service) *Handler {
-	return &Handler{services: services}
+func NewHandler(service *service.Service) *Handler {
+	return &Handler{service: service}
 }
 
 func (h *Handler) InitRoutes() *gin.Engine {
@@ -21,7 +21,6 @@ func (h *Handler) InitRoutes() *gin.Engine {
 		transaction := api.Group("/transaction")
 		{
 			transaction.POST("/", h.AddTransaction)
-			transaction.PUT("/", h.CancelTransactions)
 		}
 	}
 

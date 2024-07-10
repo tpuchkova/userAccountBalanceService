@@ -1,15 +1,15 @@
 package main
 
 import (
-	"awesomeProject"
-	"awesomeProject/pkg/handler"
-	"awesomeProject/pkg/repository"
-	"awesomeProject/pkg/service"
-	"github.com/joho/godotenv"
 	_ "github.com/lib/pq"
 	"github.com/spf13/viper"
 	"log"
 	"os"
+	"time"
+	"userAccountBalanceService"
+	"userAccountBalanceService/pkg/handler"
+	"userAccountBalanceService/pkg/repository"
+	"userAccountBalanceService/pkg/service"
 )
 
 func main() {
@@ -17,17 +17,13 @@ func main() {
 		log.Fatalf("error initializing config: %s", err.Error())
 	}
 
-	if err := godotenv.Load(); err != nil {
-		log.Fatalf("error loading env variables: %s", err.Error())
-	}
-
 	db, err := repository.NewPostgresDB(repository.Config{
-		Host:     viper.GetString("db.host"),
-		Port:     viper.GetString("db.port"),
-		Username: viper.GetString("db.username"),
-		DBName:   viper.GetString("db.dbname"),
-		SSLMode:  viper.GetString("db.sslmode"),
-		Password: os.Getenv("DB_PASSWORD"),
+		Host:     os.Getenv("DATABASE_HOST"),
+		Port:     os.Getenv("DATABASE_PORT"),
+		Username: os.Getenv("DATABASE_USERNAME"),
+		DBName:   os.Getenv("DATABASE_NAME"),
+		SSLMode:  "disable",
+		Password: os.Getenv("DATABASE_PASSWORD"),
 	})
 	if err != nil {
 		log.Fatalf("failed to initialize db: %s", err.Error())
@@ -37,25 +33,21 @@ func main() {
 	services := service.NewService(repos)
 	handlers := handler.NewHandler(services)
 
-	srv := new(awesomeProject.Server)
+	srv := new(userAccountBalanceService.Server)
 
-	//if err := srv.Run("8000", handlers.InitRoutes()); err != nil {
-	//	log.Fatalf("error occured while running http server: %s", err.Error())
-	//}
+	ticker := time.NewTicker(time.Duration(viper.GetInt("cancelTransactionIntervalMinutes")) * time.Minute)
 
-	//ticker := time.NewTicker(5 * time.Second)
-	//
-	//go func() {
-	//	for {
-	//		select {
-	//		case <-ticker.C:
-	//			err := services.CancelLatestOddTransactions()
-	//			if err != nil {
-	//				return
-	//			}
-	//		}
-	//	}
-	//}()
+	go func() {
+		for {
+			select {
+			case <-ticker.C:
+				err := services.CancelLatestOddTransactions()
+				if err != nil {
+					return
+				}
+			}
+		}
+	}()
 
 	if err := srv.Run(viper.GetString("port"), handlers.InitRoutes()); err != nil {
 		log.Fatalf("error occured while running http server: %s", err.Error())

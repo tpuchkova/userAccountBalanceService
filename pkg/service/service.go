@@ -1,9 +1,9 @@
 package service
 
 import (
-	handlermodel "awesomeProject/pkg/handler/model"
-	"awesomeProject/pkg/repository"
-	servicemodel "awesomeProject/pkg/service/model"
+	handlermodel "userAccountBalanceService/pkg/handler/model"
+	"userAccountBalanceService/pkg/repository"
+	servicemodel "userAccountBalanceService/pkg/service/model"
 )
 
 type Transaction interface {
