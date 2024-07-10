@@ -21,7 +21,7 @@ curl --location 'localhost:8080/api/transaction' \
   --data '{
     "state" : "win",
     "amount": "1",
-    "transaction_id" : "jksfjgdgddfffdldffkflds"
+    "transaction_id" : "93b1a8dd-3ee7-4958-ae83-e3f60ff9129f"
 }'
 
 Every 5 minutes 10 latest odd records will be canceled and balance will be corrected by the application.
