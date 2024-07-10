@@ -16,8 +16,8 @@
 - Example of the POST request
 `curl --location 'localhost:8080/api/transaction' \
 --header 'Source-Type: game' \
---header 'Content-Type: application/json' \
---data '{
+  --header 'Content-Type: application/json' \
+  --data '{
     "state" : "win",
     "amount": "1",
     "transaction_id" : "jksfjgdgddfffdldffkflds"
