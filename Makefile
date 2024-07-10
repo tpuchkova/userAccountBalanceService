@@ -1,5 +1,5 @@
 run:
-	docker-compose up todo-app
+	docker-compose up --build
 
 migrate:
-	 migrate -path ./schema -database 'postgres://postgres:qwerty@localhost:5432/postgres?sslmode=disable'
+	 migrate -path ./schema -database 'postgres://postgres:qwerty@localhost:5432/postgres?sslmode=disable' up
