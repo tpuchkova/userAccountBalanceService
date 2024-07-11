@@ -1,12 +1,14 @@
 package handler
 
 import (
-	"github.com/gin-gonic/gin"
 	"net/http"
 	"slices"
 	"strconv"
+
 	"userAccountBalanceService/pkg/handler/model"
 	servicemodel "userAccountBalanceService/pkg/service/model"
+
+	"github.com/gin-gonic/gin"
 )
 
 func (h *Handler) AddTransaction(c *gin.Context) {

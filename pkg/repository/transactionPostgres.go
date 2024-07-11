@@ -2,9 +2,11 @@ package repository
 
 import (
 	"fmt"
-	"github.com/jmoiron/sqlx"
 	"strings"
+
 	"userAccountBalanceService/pkg/repository/model"
+
+	"github.com/jmoiron/sqlx"
 )
 
 type TransactionPostgres struct {
@@ -39,7 +41,7 @@ func (r *TransactionPostgres) CancelByIDs(idsToCancel []int) error {
 	return err
 }
 
-func (r *TransactionPostgres) AddTransaction(transaction model.Transaction) (*model.Transaction, error) {
+func (r *TransactionPostgres) AddTransaction(transaction model.Transaction) (model.Transaction, error) {
 	var id int
 	var state string
 	var amount float64
@@ -48,10 +50,10 @@ func (r *TransactionPostgres) AddTransaction(transaction model.Transaction) (*mo
 
 	row := r.db.QueryRow(createQuery, transaction.State, transaction.Amount, transaction.TransactionID)
 	if err := row.Scan(&id, &state, &amount, &transactionID); err != nil {
-		return nil, err
+		return model.Transaction{}, err
 	}
 
-	return &model.Transaction{
+	return model.Transaction{
 		ID:            id,
 		State:         state,
 		Amount:        amount,

@@ -1,8 +1,9 @@
 package repository
 
 import (
-	"github.com/jmoiron/sqlx"
 	"userAccountBalanceService/pkg/repository/model"
+
+	"github.com/jmoiron/sqlx"
 )
 
 type Balance interface {
@@ -11,7 +12,7 @@ type Balance interface {
 }
 
 type Transaction interface {
-	AddTransaction(transaction model.Transaction) (*model.Transaction, error)
+	AddTransaction(transaction model.Transaction) (model.Transaction, error)
 	GetLatestTransactions(count int) ([]model.Transaction, error)
 	CancelByIDs(ids []int) error
 }

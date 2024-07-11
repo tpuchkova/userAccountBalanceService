@@ -1,16 +1,18 @@
 package main
 
 import (
-	"github.com/jmoiron/sqlx"
-	_ "github.com/lib/pq"
-	"github.com/spf13/viper"
 	"log"
 	"os"
 	"time"
+
 	"userAccountBalanceService"
 	"userAccountBalanceService/pkg/handler"
 	"userAccountBalanceService/pkg/repository"
 	"userAccountBalanceService/pkg/service"
+
+	"github.com/jmoiron/sqlx"
+	_ "github.com/lib/pq"
+	"github.com/spf13/viper"
 )
 
 func main() {
