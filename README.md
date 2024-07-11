@@ -16,7 +16,7 @@ This is Golang application for processing the incoming requests from the 3d-part
 - Run migrations `make migrate`
 
 ## Usage
-- Example of the POST request
+Example of the POST request
 
 curl --location 'localhost:8080/api/transaction' \
 --header 'Source-Type: game' \
