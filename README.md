@@ -29,5 +29,8 @@ State can be "win" or "lost".
 Win requests increases the user balance. Lost requests decreases user balance.
 Each request (with the same transaction id) can be processed only once.
 
-Every 5 minutes 10 latest odd records will be canceled and balance will be corrected by the application. You can see it in application logs. Time interval can be changed in configs/config.yml file
+Every 5 minutes 10 latest odd records will be canceled and balance will be corrected by the application. You can see it in application logs. Time interval can be changed in `configs/config.yml` file.
 Canceled records can not be processed twice
+
+## Unit tests
+- Run `make test` to run service unit tests
