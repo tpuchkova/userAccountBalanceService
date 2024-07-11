@@ -1,3 +1,6 @@
+# User Account Balance Service
+This is Golang application for processing the incoming requests from the 3d-party providers. Database is PostgreSQL.
+
 ## Prerequisites
 - The **Go** programming language https://golang.org/dl/
 - **Docker Desktop** https://www.docker.com/products/docker-desktop
