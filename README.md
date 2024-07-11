@@ -29,7 +29,7 @@ curl --location 'localhost:8080/api/transaction' \
 
 Source-Type header can be game, server or payment.
 
-State can be "win" or "lost".Win requests increases the user balance. Lost requests decreases user balance. Balance can not be negative.
+State can be "win" or "lost". Win requests increases the user balance. Lost requests decreases user balance. Balance can not be negative.
 
 Each request (with the same transaction id) can be processed only once.
 
