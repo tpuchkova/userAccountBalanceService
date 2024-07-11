@@ -29,7 +29,7 @@ curl --location 'localhost:8080/api/transaction' \
 
 Source-Type header can be game, server or payment.
 State can be "win" or "lost".
-Win requests increases the user balance. Lost requests decreases user balance.
+Win requests increases the user balance. Lost requests decreases user balance. Balance can not be negative.
 Each request (with the same transaction id) can be processed only once.
 
 Every 5 minutes 10 latest odd records will be canceled and balance will be corrected by the application. You can see it in application logs. Time interval can be changed in `configs/config.yml` file.
