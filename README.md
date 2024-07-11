@@ -37,3 +37,10 @@ Canceled records can not be processed twice
 
 ## Unit tests
 - Run `make test` to run service unit tests
+
+## Database 
+To access the database using GoLand add database source PostgreSQL in your IDE:
+User: postgres
+Password: qwerty
+Database: postgres
+
